@@ -1,0 +1,51 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+
+handlers:
+- url: /bower_components
+  static_dir: bower_components
+  secure: always
+
+- url: /favicon.ico
+  static_files: images/favicon.ico
+  upload: images/favicon.ico
+  secure: always
+
+- url: /data
+  static_dir: data
+  secure: always
+  application_readable: true
+
+- url: /images
+  static_dir: images
+  secure: always
+
+- url: /src
+  static_dir: src
+  secure: always
+
+- url: /sitemap.xml
+  static_files: sitemap.xml
+  upload: sitemap.xml
+  secure: always
+
+- url: /manifest.json
+  static_files: manifest.json
+  upload: manifest.json
+  mime_type: application/manifest+json
+  secure: always
+
+- url: /service-worker.js
+  static_files: service-worker.js
+  upload: service-worker.js
+  secure: always
+  expiration: "1s" # "0s" doesn't work
+
+- url: .*
+  script: main.app
+  secure: always

@@ -14,27 +14,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta charset="utf-8">
   <base href="/">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Everything Technology.">
+  <meta name="keywords" content="news, android, android tv, google, google pixel, pixel 2 xl, Oreo, kitkat, Technology">
+  <meta name="google-site-verification" content="5GKGDhQ9UvBIEFpoo3gFJT_cffXG_0mvyYbUQ2uH6Q4">
+  <span itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="A-hAAn Technology"/>
+    <meta itemprop="alternateName" content="A-hAAn"/>
+    <link itemprop="url" href="https://ahaan.co.uk"/>
+    <img itemprop="logo" src="https://ahaan.co.uk/images/A-hAAn128.png"/>
+    <a itemprop="sameAs" href="https://twitter.com/AhAAn20">Twitter</a>
+    <a itemprop="sameAs" href="https://plus.google.com/u/0/+AliAhmedHussan">Google+</a>
+    <a itemprop="sameAs" href="https://www.youtube.com/user/ahaan22">YouTube</a>
+  </span>
+  <title>A-hAAn Technology</title>
 
-  <title>NEWS</title>
 
-  <link rel="shortcut icon" sizes="32x32" href="images/news-icon-32.png">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@Polymer">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NEWS">
-  <meta name="theme-color" content="#000">
+  <link rel="shortcut icon" sizes="72x72" href="images/icons/icon-72x72.png">
+  <meta name="theme-color" content="#AA00FF">
   <link rel="manifest" href="manifest.json">
 
-  <style>
 
+
+
+
+  <style>
     body {
+      font-family: 'Product Sans';
       margin: 0;
-      background-color: #FAFAFA;
-      color: #383838;
-      font-family: Georgia;
+      background-color: #E0E0E0;
+      color: #FAFAFA;
       min-height: 100vh;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
+    @font-face {
+      font-family: 'Product Sans';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+}
 
     /* styling for render while resources are loading */
     news-app[unresolved] {
@@ -46,12 +63,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       font-weight: 600;
       letter-spacing: 10px;
       text-align: center;
-    }
+      font-family: 'Roboto Condensed';
 
+    }
+    span{
+      display: none;
+
+
+
+}
     /* mobile */
     @media (max-width: 767px) {
       body {
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 15%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.7) 48%, rgba(0,0,0,1) 60%);
+        background-image: linear-gradient(to bottom, rgba(103,58,183,0.6) 0%, rgba(103,58,183,0.25) 25%, rgba(103,58,183,0.25) 50%, rgba(103,58,183,0.7) 80%, rgba(103,58,183,1) 100%);
         background-repeat: no-repeat;
         background-size: 100% 100vh;
       }
@@ -69,14 +93,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
   </style>
-
 </head>
 <body>
 
-  <news-app unresolved app-title="NEWS">NEWS</news-app>
+  <news-app unresolved app-title="A-hAAn">
+
+        <disqus-thread shortname="ahaan"></disqus-thread>
+  </news-app>
+
+
+
+
+  <share-menu id="shareMenu" via="ahaan20" dialog-title="Share now!" copy-success-text="Text copied to clipboard!" copy-failed-text="Oh no! Couldn't copy the text automatically :(" is-image="auto"></share-menu>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <script>
+
+       (adsbygoogle = window.adsbygoogle || []).push({
+
+            google_ad_client: "ca-pub-8720447500483449",
+
+            enable_page_level_ads: true
+
+       });
+
+  </script>
+
+<news-footer></news-footer>
+
 
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="import" href="src/news-app.html">
+  <link rel="import" href="src/news-footer.html">
+<link rel="import" href="bower_components/share-menu/share-menu.html">
+<link rel="import" href="../bower_components/disqus-thread/disqus-thread.html">
+
+
 
 </body>
 </html>

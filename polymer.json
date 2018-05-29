@@ -10,15 +10,23 @@
   "sources": [
     "src/**/*",
     "images/**/*",
-    "data/**/*"
+    "data/**/*",
+    "app.yaml",
+    "bower.json",
+    "index.html",
+    "main.py",
+    "sitemap.xml"
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/*"
+    "bower_components/webcomponentsjs/*",
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js"
   ],
   "lint": {
     "rules": ["polymer-2-hybrid"]
   },
+
+
   "builds": [
     {
       "preset": "es5-bundled"

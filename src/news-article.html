@@ -11,9 +11,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/share-menu/share-menu.html">
 
 <link rel="import" href="news-article-cover.html">
 <link rel="import" href="news-side-list.html">
+<link rel="import" href="news-gpt-ad1.html">
 
 <dom-module id="news-article">
 
@@ -22,6 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
+
       }
 
       [hidden] {
@@ -31,18 +34,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .container {
         display: flex;
       }
-
+      .articlead {
+        float: left;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
       .container .fade-in {
         opacity: 0;
       }
 
       .container[fade-in] .fade-in {
         opacity: 1;
-        transition: opacity 500ms;
+        transition: opacity 1000ms;
       }
 
       .flex {
         flex: 1;
+        background-color: white;
+        color: black;
+        padding: 20px;
+        border-radius:5px;
       }
 
       .preview-cover {
@@ -56,6 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       #content img {
         max-width: 100%;
+        width: calc(100% - 0px);
       }
 
       #content figure {
@@ -73,6 +87,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       #content .byline {
         font-weight: bold;
       }
+      .articlead{
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
 
       aside {
         margin-left: 24px;
@@ -81,6 +100,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       news-side-list {
         margin-bottom: 32px;
+        margin-bottom: 32px;
+        background-color: white;
+        color: black;
+        padding: 5px;
+        border-radius:5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
       }
 
       news-gpt-ad {
@@ -89,11 +115,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 250px;
       }
 
+      news-gpt-ad1 {
+        display: block;
+        width: 300px;
+        height: 600px;
+        margin-bottom: auto;
+      }
+
+      img {
+        width: calc(100% - 0px);
+
+      }
+
       .share-link {
         display: inline-block;
         margin-right: 24px;
         margin-bottom: 24px;
-        color: inherit;
+        color: black;
         font-size: 11px;
         font-weight: bold;
         text-decoration: none;
@@ -108,13 +146,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         justify-content: center;
         margin-bottom: 24px;
       }
+      paper-fab {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 11;
+        background-color: #673AB7;
+
+      }
 
       /* mobile */
       @media (max-width: 767px) {
+        :host {
+          display: block;
+          color: black;
+          padding: 0px;
+          border-radius:5px;
+        }
         .container {
           display: block;
         }
+        .flex {
+          flex: 1;
+          background-color: white;
+          color: black;
+          padding: 0px;
+          border-radius:10px;
+          margin-bottom: 20px;
+        }
+        news-gpt-ad {
+          margin-left: auto;
+          margin-right: auto;
+          padding-left: 12px;
+          padding-right: 12px;
+          padding-top: 5px;
+          padding-bottom: 5px;
 
+        }
         .preview-cover {
           position: absolute;
           top: 0;
@@ -149,6 +217,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
         }
+        .ad-containerarticlebot {
+          display: none;
+        }
 
         :host-context(.fixed-viewport-height) h1 {
           font-size: calc(var(--viewport-height) * 0.06);
@@ -164,33 +235,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{_routeData}}"></app-route>
 
     <div class="container" fade-in$="[[!loading]]" hidden$="[[failure]]">
-      <article class="flex">
+      <article id="article" class="flex">
+
         <news-article-cover id="cover0" class="fade-in"></news-article-cover>
         <news-article-cover id="cover1" class="preview-cover"></news-article-cover>
         <news-article-cover id="cover2" class="preview-cover"></news-article-cover>
         <div id="content" class="fade-in"></div>
+        <slot></slot>
+      <div class="ad-containerarticlebot">
+        <news-gpt-ad id="adslot7"
+            ad-unit-path="/21615022194/articlebottomdesk"
+            ad-width="970" ad-height="250"></news-gpt-ad>
+        </div><br><br>
+  <paper-fab noink icon="share" title="share" onclick="shareMenu.share()"></paper-fab>
       </article>
 
       <aside>
         <div class="ad-container">
-          <news-gpt-ad id="ad_slot_2"
-              ad-unit-path="/6355419/Travel/Europe/France/Paris"
-              ad-width="300" ad-height="250"></news-gpt-ad>
+          <news-gpt-ad id="adslot3"
+                ad-unit-path="/21615022194/in_article_test"
+                ad-width="300" ad-height="250"></news-gpt-ad>
         </div>
-        <a href="#" class="share-link" aria-label="Send by email">
-          <iron-icon icon="mail"></iron-icon> Email
-        </a>
-        <a href="#" class="share-link" aria-label="Share on social networks">
-          <iron-icon icon="share"></iron-icon> Share
-        </a>
-        <news-side-list class="fade-in" items="[[_slice(category.items, 0, 3)]]">
+          <news-side-list class="fade-in" items="[[_slice(category.items, 0, 3)]]">
           Most Read
         </news-side-list>
         <news-side-list class="fade-in" featured items="[[_slice(category.items, 3, 9)]]">
           Top Stories
         </news-side-list>
+        <div class="ad-container">
+        <news-gpt-ad1 id="adslot4"
+            ad-unit-path="/21615022194/side_banner"
+            ad-width="300" ad-height="600"></news-gpt-ad1>
+          </div>
+        </div>
       </aside>
-    </div>
+
 
     <news-network-warning
         hidden$="[[!failure]]"
@@ -199,86 +278,65 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </template>
 
+
+
   <script>
-
     class NewsArticle extends Polymer.Element {
-
       static get is() { return 'news-article'; }
-
       static get properties() { return {
-
         route: Object,
-
         category: Object,
-
         article: Object,
-
         previousArticle: {
           type: Object,
           computed: '_computePreviousArticle(category.items, article)'
         },
-
         nextArticle: {
           type: Object,
           computed: '_computeNextArticle(category.items, article)'
         },
-
         loading: Boolean,
-
         offline: Boolean,
-
         failure: Boolean,
-
         categoryName: {
           type: Boolean,
           computed: '_return(_routeData.category)',
           notify: true
         },
-
         articleId: {
           type: Boolean,
           computed: '_return(_routeData.id)',
           notify: true
         },
-
         _routeData: Object
-
       }}
-
       static get observers() { return [
         '_loadArticle(article.html)',
         '_articleChanged(article)'
       ]}
-
       connectedCallback() {
         super.connectedCallback();
         this._currentArticleCover = this.$.cover0;
         this._previousArticleCover = this.$.cover1;
         this._nextArticleCover = this.$.cover2;
-
         this._currentArticleCover.article = this.article;
-
         Polymer.RenderStatus.afterNextRender(this, this._installListeners);
       }
-
       _installListeners() {
         this._desktopMediaQuery = window.matchMedia('(min-width: 768px)');
         this.addEventListener('touchstart', this._touchstart.bind(this));
         this.addEventListener('touchmove', this._touchmove.bind(this));
         this.addEventListener('touchend', this._touchend.bind(this));
       }
-
       _touchstart(event) {
         if (this._isDesktopWidth()) {
           return;
         }
-
         // Save start coordinates
         if (!this._touchDir) {
           this._startX = event.changedTouches[0].clientX;
           this._startY = event.changedTouches[0].clientY;
         }
-
         if (this.previousArticle) {
           this._previousArticleCover.article = this.previousArticle;
         }
@@ -286,30 +344,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this._nextArticleCover.article = this.nextArticle;
         }
       }
-
       _touchmove(event) {
         if (this._isDesktopWidth()) {
           return;
         }
-
         // Is touchmove mostly horizontal or vertical?
         if (!this._touchDir) {
           const absX = Math.abs(event.changedTouches[0].clientX - this._startX);
           const absY = Math.abs(event.changedTouches[0].clientY - this._startY);
           this._touchDir = absX > absY ? 'x' : 'y';
         }
-
         if (this._touchDir === 'x') {
           // Prevent vertically scrolling when swiping
           event.preventDefault();
-
           let dx = Math.round(event.changedTouches[0].clientX - this._startX);
-
           // Don't translate past the current image if there's no adjacent image in that direction
           if ((!this.previousArticle && dx > 0) || (!this.nextArticle && dx < 0)) {
             dx = 0;
           }
-
           if (this.previousArticle) {
             this._translate(this._previousArticleCover, dx - this.offsetWidth, window.pageYOffset);
           }
@@ -318,25 +370,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
       }
-
       _touchend(event) {
         if (this._isDesktopWidth()) {
           return;
         }
-
         // Don't finish swiping if there are still active touches.
         if (event.touches.length) {
           return;
         }
-
         if (this._touchDir === 'x') {
           let dx = Math.round(event.changedTouches[0].clientX - this._startX);
-
           // Don't translate past the current image if there's no adjacent image in that direction
           if ((!this.previousArticle && dx > 0) || (!this.nextArticle && dx < 0)) {
             dx = 0;
           }
-
           if (dx > 0) {
             if (dx > 100) {
               this._translate(this._previousArticleCover, 0, window.pageYOffset, true /* transition */);
@@ -371,40 +418,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
           }
         }
-
         // Reset touch direction
         this._touchDir = null;
       }
-
       _translate(elem, x, y, transition) {
         elem.style.display = 'block';
         elem.style.transition = transition ? 'transform 0.2s' : '';
         elem.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
       }
-
       _resetElementStyles(elem) {
         elem.style.display = '';
         elem.style.transition = '';
         elem.style.transform = '';
       }
-
       _swapCurrentArticleCovers(newCover) {
         const oldCover = this._currentArticleCover;
         oldCover.classList.remove('fade-in');
         oldCover.classList.add('preview-cover');
-
         this._resetElementStyles(newCover);
         newCover.classList.remove('preview-cover');
         this._currentArticleCover = newCover;
         newCover.parentElement.insertBefore(newCover, oldCover);
-
         return oldCover;
       }
-
       _isDesktopWidth() {
         return this._desktopMediaQuery.matches;
       }
-
       _loadArticle(html) {
         // If this._currentArticleCover isn't defined here, then it hasn't been stamped yet, and
         // the template already has the `fade-in` class.
@@ -414,7 +453,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.content.innerHTML = html;
         //ShadyCSS.styleSubtree(this.$.content);
       }
-
       _articleChanged(article) {
         // If this._currentArticleCover isn't defined here, then `attached()` (which hasn't been
         // run yet) will set the article.
@@ -422,39 +460,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this._currentArticleCover.article = article;
         }
       }
-
       _tryReconnect() {
         this.dispatchEvent(new CustomEvent('refresh-data', {bubbles: true, composed: true}));
       }
-
       _slice(list, begin, end) {
         if (list) {
           return list.slice(begin, end);
         }
       }
-
       _return(value) {
         return value;
       }
-
       _computePreviousArticle(categoryItems, article) {
         if (categoryItems) {
           const i = categoryItems.indexOf(article);
           return i > 0 ? categoryItems[i-1] : null;
         }
       }
-
       _computeNextArticle(categoryItems, article) {
         if (categoryItems) {
           const i = categoryItems.indexOf(article);
           return (i > -1 && i < categoryItems.length-1) ? categoryItems[i+1] : null;
         }
       }
-
     }
-
     customElements.define(NewsArticle.is, NewsArticle);
-
   </script>
 
 </dom-module>

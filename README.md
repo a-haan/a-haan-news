@@ -5,18 +5,23 @@
 ### Polymer CLI
 
 Install [polymer-cli](https://github.com/Polymer/polymer-cli):
+(Need at least npm v0.3.0)
 
     npm install -g polymer-cli
 
-### Setup
+### Google App Engine SDK
 
-    git clone https://github.com/polymer/news.git
-    cd news
+Install [Google App Engine SDK](https://cloud.google.com/appengine/downloads)
+
+## Setup
+
+    git clone https://github.com/a-haan/a-haan-news.git
+    cd a-haan-news
     bower install
 
 ## Start the development server
 
-    polymer serve
+    dev_appserver.py .
 
 ## Build
 
@@ -24,6 +29,14 @@ Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
 ## Test the build
 
-Use `polymer serve` to serve a specific build preset of the app. For example:
+This command serves the minified version of the app in an unbundled state, as it would be served by a push-compatible server:
 
-    polymer serve build/es5-bundled
+    dev_appserver.py build/unbundled
+
+This command serves the minified version of the app generated using fragment bundling:
+
+    dev_appserver.py build/default
+
+## Deploy to Google App Engine
+
+    gcloud app deploy build/default/app.yaml --project [YOUR_PROJECT_ID]

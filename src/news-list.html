@@ -21,50 +21,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
 
     <style include="app-grid-style">
-
       :host {
         display: block;
       }
-
       [hidden] {
         display: none !important;
       }
-
       .container .fade-in {
         opacity: 0;
       }
-
       .container[fade-in] .fade-in {
         opacity: 1;
         transition: opacity 500ms;
       }
-
       .content {
         @apply --layout-flex;
       }
-
       .article-grid,
       .opinions-grid {
         margin: 0;
         padding: 0;
         list-style: none;
       }
-
       .article-grid {
         margin-top: 32px;
       }
-
       li {
         display: block;
       }
-
       h3 {
         @apply --app-sub-section-headline;
         margin: 24px 0;
       }
-
       news-side-list {
         margin-bottom: 32px;
+        background-color: white;
+        color: black;
+        padding: 5px;
+        border-radius:5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
       }
 
       news-gpt-ad {
@@ -72,71 +68,86 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 300px;
         height: 250px;
       }
-
       .ad-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 24px;
+        display: flex!important;
+        justify-content: center!important;
+        margin-bottom: 24px!important;
+        min-width: 300px !important;
       }
-
       /* mobile */
       @media (max-width: 767px) {
-        aside {
-          display: none;
+        #container div.ad-container{
+          min-width: 300px !important;
+          min-width: 300px !important;
         }
 
+        asidelist {
+          display: none;
+        }
+        news-gpt-ad {
+          margin-left: auto;
+          margin-right: auto;
+          padding-left: 12px;
+          padding-right: 12px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          }
         .article-grid li,
         .opinions-grid li{
           border-bottom: var(--app-border-style);
           margin: 0px 24px 24px 24px;
           padding-bottom: 24px;
         }
-
         .article-grid li:last-of-type,
         .opinions-grid li:last-of-type {
           border-bottom: none;
         }
       }
-
       /* desktop */
       @media (min-width: 768px) {
         :host {
           --app-grid-columns: 4;
           --app-grid-gutter: 32px;
         }
-
+        .ad-container-mobonly{
+          display:none;
+        }
         .opinions-grid {
           @apply --layout-horizontal;
           @apply --layout-wrap;
         }
-
         .opinions-grid li {
           width: calc(50% - 32px);
           margin-right: 32px;
         }
-
         .article-grid,
         .opinions-grid {
           margin-right: -32px;
         }
       }
-
       /* desktop large */
       @media (min-width: 1310px) {
         .container {
           @apply --layout-horizontal;
         }
-
         .content {
           margin-right: 24px;
         }
+        asidead {
+          width: 300px;
+          min-width: 300px;
 
-        aside {
+        }
+        asidelist {
+          width: 300px;
+          min-width: 300px;
+
+        }
+        asidemain {
           width: 300px;
           min-width: 300px;
         }
       }
-
     </style>
 
     <!--
@@ -152,8 +163,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <news-list-featured-item item="[[_getFeaturedItem(category.items)]]">
         </news-list-featured-item>
 
+<!-- Advert for Mobile Only -->
+
+<div class="ad-container-mobonly">
+  <news-gpt-ad id="listmobileonly"
+        ad-unit-path="/21615022194/in_article_test"
+        ad-width="300" ad-height="250"></news-gpt-ad>
+</div>
+
+
         <ul class="app-grid article-grid fade-in">
-          <dom-repeat items="[[_slice(category.items, 1, 5)]]">
+          <dom-repeat items="[[_slice(category.items, 1, 9)]]">
             <template>
               <li>
                 <news-list-item item="[[item]]"></news-list-item>
@@ -162,9 +182,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </dom-repeat>
         </ul>
 
+        <!-- Advert for Mobile Only -->
+
+        <div class="ad-container-mobonly">
+          <news-gpt-ad id="listmobileonly2"
+                ad-unit-path="/21615022194/in_article_test"
+                ad-width="300" ad-height="250"></news-gpt-ad>
+        </div>
+
         <h3>Opinions</h3>
         <ul class="opinions-grid fade-in">
-          <dom-repeat items="[[_slice(category.items, 5)]]">
+          <dom-repeat items="[[_slice(category.items, 9)]]">
             <template>
               <li>
                 <news-list-item horizontal item="[[item]]"></news-list-item>
@@ -174,19 +202,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </ul>
       </div>
 
-      <aside>
-        <div class="ad-container">
-          <news-gpt-ad id="ad_slot_1"
-              ad-unit-path="/6355419/Travel/Europe/France/Paris"
+      <!-- Advert for Mobile Only -->
+
+      <div class="ad-container-mobonly">
+        <news-gpt-ad id="listmobileonly3"
+              ad-unit-path="/21615022194/in_article_test"
               ad-width="300" ad-height="250"></news-gpt-ad>
-        </div>
+      </div>
+
+      <asidemain>
+      <asidelist>
         <news-side-list class="fade-in" items="[[_slice(category.items, 0, 3)]]">
           Most Read
         </news-side-list>
+        <asidead>
+        <div name="ad-contain" class="ad-container">
+          <news-gpt-ad id="adslot1"
+                ad-unit-path="/21615022194/topright"
+                ad-width="300" ad-height="250"></news-gpt-ad>
+        </div>
+      </asidead>
         <news-side-list class="fade-in" featured items="[[_slice(category.items, 3, 9)]]">
           More Top Stories
         </news-side-list>
-      </aside>
+      </asidelist>
+      </asidemain>
     </div>
 
     <news-network-warning
@@ -197,71 +237,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-
     class NewsList extends Polymer.Element {
-
       static get is() { return 'news-list'; }
-
       static get properties() { return {
-
         route: Object,
-
         category: Object,
-
         offline: Boolean,
-
         failure: Boolean,
-
         categoryName: {
           type: Boolean,
           computed: '_return(routeData.category)',
           notify: true
         },
-
         routeData: Object,
-
         loading: Boolean
-
       }}
-
       connectedCallback() {
         super.connectedCallback();
         this._boundResizeHandler = this._resizeHandler.bind(this);
         window.addEventListener('resize', this._boundResizeHandler);
       }
-
       disconnectedCallback() {
         super.disconnectedCallback();
         window.removeEventListener('resize', this._boundResizeHandler);
       }
-
       _getFeaturedItem(items) {
         return items ? items[0] : {};
       }
-
       _tryReconnect() {
         this.dispatchEvent(new CustomEvent('refresh-data', {bubbles: true, composed: true}));
       }
-
       _resizeHandler() {
         this._resizeDebouncer = Polymer.Debouncer.debounce(this._resizeDebouncer,
           Polymer.Async.timeOut.after(50), () => { this.updateStyles(); });
       }
-
       _slice(list, begin, end) {
         if (list) {
           return list.slice(begin, end);
         }
       }
-
       _return(value) {
         return value;
       }
-
     }
-
     customElements.define(NewsList.is, NewsList);
-
   </script>
 
 </dom-module>

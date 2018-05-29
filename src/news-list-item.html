@@ -8,7 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <link rel="import" href="news-img.html">
@@ -27,27 +27,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         position: relative;
         text-decoration: none;
-        color: inherit;
+        color: #212121;
         overflow: hidden;
+        background: #FFFFFF;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border-radius:5px;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
       }
 
+      a:hover {
+        display: block;
+        position: relative;
+        text-decoration: none;
+        color: #212121;
+        overflow: hidden;
+        background: #FFFFFF;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -moz-transform: scale(50px, 50px);
+        -webkit-transform: scale(50px, 50px);
+        transform: scale(50px, 50px);
+}
       news-img {
         height: 150px;
       }
 
       h2 {
-        margin: 18px 0;
+        margin: 18px 5px 5px 5px;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 28px;
+        min-height: 55px;
+        max-height: 60px;
       }
 
       .category {
         padding: 6px 20px 7px;
-        border: var(--app-border-style);
-        display: inline-block;
+        border: solid;
+        display: block;
         font-weight: bold;
-        font-size: 11px;
+        font-size: 15px;
+        background: black;
+        color: var(--app-cover-text-color);
       }
 
       .category[hidden] {
@@ -58,9 +81,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .details {
-        @apply --layout-horizontal;
+        @apply(--layout-horizontal);
         font-size: 11px;
         font-weight: bold;
+        padding: 10px;
+        border-top: 1px solid #CCC
       }
 
       .time-ago {
@@ -76,9 +101,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       /* mobile */
       @media (max-width: 767px) {
-        news-img {
+            .details {
+          font-size: 11px;
+          font-weight: bold;
+          padding-bottom: 5px;
+        }
+        .category {
           display: none;
         }
+          h2 {
+            margin: 2px 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 28px;
+            padding: 10px;
+            min-height: 15px;
+            max-height: 25px;
+            overflow: hidden;
+
+          }
+
       }
 
       /* desktop */
@@ -86,21 +128,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         :host([horizontal]) {
           margin-bottom: 24px;
         }
-
+        h2 {
+          margin: 5px 0;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 28px;
+          padding: 10px;
+          min-height: 60px;
+          max-height: 70px;
+          overflow: hidden;
+        }
         .category {
-          margin-top: 20px;
+          display: none;
         }
       }
 
       /* desktop large */
       @media (min-width: 1310px) {
         :host([horizontal]) a {
-          @apply --layout-horizontal;
+          @apply(--layout-horizontal);
         }
 
         :host([horizontal]) news-img {
           min-width: 150px;
-          margin-right: 24px;
+          margin-right: 5px;
         }
 
         :host([horizontal]) .category {
@@ -109,6 +160,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     </style>
+
 
     <a href$="[[item.href]]">
       <news-img src="[[item.imageUrl]]" alt="[[item.headline]]"></news-img>
@@ -124,23 +176,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-
     class NewsListItem extends Polymer.Element {
-
       static get is() { return 'news-list-item'; }
-
       static get properties() { return {
-
         item: {
           type: Object
         }
-
       }}
-
     }
-
     customElements.define(NewsListItem.is, NewsListItem);
-
   </script>
 
 </dom-module>
