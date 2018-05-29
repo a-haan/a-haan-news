@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,17 +6,16 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+*/
+import '../../../@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+import '../../../@polymer/iron-icon/iron-icon.js';
+import './news-icons.js';
+import { Polymer } from '../../../@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '../../../@polymer/polymer/lib/utils/html-tag.js';
 
-<link rel="import" href="news-icons.html">
-
-<dom-module id="news-network-warning">
-
-  <template>
-
+Polymer({
+  _template: html`
     <style>
 
       :host {
@@ -65,34 +64,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <iron-icon icon="cloud-off"></iron-icon>
-    <div hidden$="[[offline]]">
+    <div hidden\$="[[offline]]">
       <h1>Couldn't reach the server</h1>
     </div>
-    <div hidden$="[[!offline]]">
+    <div hidden\$="[[!offline]]">
       <h1>No internet connection</h1>
       <p>Check if your device is connected to a mobile network or WiFi.</p>
     </div>
 
     <button on-tap="_tryReconnect">Try Again</button>
+`,
 
-  </template>
+  is: 'news-network-warning',
 
-  <script>
+  properties: {
+    offline: Boolean
+  },
 
-    Polymer({
-
-      is: 'news-network-warning',
-
-      properties: {
-        offline: Boolean
-      },
-
-      _tryReconnect: function() {
-        this.fire('try-reconnect', null, { bubbles: false });
-      }
-
-    });
-
-  </script>
-
-</dom-module>
+  _tryReconnect: function() {
+    this.fire('try-reconnect', null, { bubbles: false });
+  }
+});

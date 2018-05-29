@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,18 +6,17 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+*/
+import '../../../@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/google-youtube/google-youtube.html">
-
-<link rel="import" href="news-img.html">
-
-<dom-module id="news-list-featured-item">
-
-  <template>
-
+import '../../../@polymer/iron-flex-layout/iron-flex-layout.js';
+import '../../../google-youtube/google-youtube.js';
+import './news-img.js';
+import { html } from '../../../@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
+class NewsListFeaturedItem extends PolymerElement {
+  static get template() {
+    return html`
     <style>
 
       :host {
@@ -321,18 +320,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     </style>
-    <center><div class="ad-container"><news-gpt-ad id="adslot4article"
-        ad-unit-path="/21615022194/smart"
-        ad-width="970" ad-height="250" text-align="center"></news-gpt-ad><br><br></div></center>
+    <center><div class="ad-container"><news-gpt-ad id="adslot4article" ad-unit-path="/21615022194/smart" ad-width="970" ad-height="250" text-align="center"></news-gpt-ad><br><br></div></center>
 
 <div class="border">
-    <a href$="[[item.href]]">
+    <a href\$="[[item.href]]">
       <div class="img-container">
         <news-img alt="[[item.headline]]" src="[[item.imageUrl]]" placeholder-src="[[item.placeholder]]"></news-img>
         <div class="scrim"></div>
       </div>
       <div class="headline">
-        <div class="category" hidden$="[[!item.category]]">[[item.category]]</div>
+        <div class="category" hidden\$="[[!item.category]]">[[item.category]]</div>
         <h2>[[item.headline]]</h2>
         <div class="details">
           <div class="time-ago">[[item.timeAgo]]</div>
@@ -342,36 +339,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <br>
       </div>
     </a>
-    <div class="bordervid"><center><google-youtube class="[[item.vidShow]]"
-                          playsupported="{{playSupported}}"
-                          video-id="[[item.vidSrc]]"
-                          state="{{state}}"
-                          width="auto"
-                          height="500px"
-                          currenttime="{{currentTime}}"
-                          currenttimeformatted="{{currentTimeFormatted}}"
-                          duration="{{duration}}"
-                          durationformatted="{{durationFormatted}}"
-                          fractionloaded="{{fractionLoaded}}"
-                          volume="{{volume}}"
-                          playbackrate="{{playbackRate}}"
-                          playbackquality="{{playbackQuality}}"
-                          on-google-youtube-error="handleYouTubeError"
-                          ></google-youtube></center></div>
+    <div class="bordervid"><center><google-youtube class="[[item.vidShow]]" playsupported="{{playSupported}}" video-id="[[item.vidSrc]]" state="{{state}}" width="auto" height="500px" currenttime="{{currentTime}}" currenttimeformatted="{{currentTimeFormatted}}" duration="{{duration}}" durationformatted="{{durationFormatted}}" fractionloaded="{{fractionLoaded}}" volume="{{volume}}" playbackrate="{{playbackRate}}" playbackquality="{{playbackQuality}}" on-google-youtube-error="handleYouTubeError"></google-youtube></center></div>
 
     <div class="floatcontainer"><div class="fixfloatcontainer"><a class="bordertext">[[item.vidTxt]]<br></a></div></div>
-      <div ><a class="bordervideo"></a></center></div>
+      <div><a class="bordervideo"></a></div>
     </div>
-  </template>
+`;
+  }
 
-  <script>
-    class NewsListFeaturedItem extends Polymer.Element {
-      static get is() { return 'news-list-featured-item'; }
-      static get properties() { return {
-        item: Object
-      }}
-    }
-    customElements.define(NewsListFeaturedItem.is, NewsListFeaturedItem);
-  </script>
-
-</dom-module>
+  static get is() { return 'news-list-featured-item'; }
+  static get properties() { return {
+    item: Object
+  }}
+}
+customElements.define(NewsListFeaturedItem.is, NewsListFeaturedItem);

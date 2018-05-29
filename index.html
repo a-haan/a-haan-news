@@ -124,12 +124,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="src/news-app.html">
-  <link rel="import" href="src/news-footer.html">
-<link rel="import" href="bower_components/share-menu/share-menu.html">
+  <script type="module" src="./src/news-app.js"></script>
+  <script type="module" src="./src/news-footer.js"></script>
+<script type="module" src="../../share-menu/share-menu.js"></script>
 <link rel="import" href="../bower_components/disqus-thread/disqus-thread.html">
 
 
 
 </body>
-</html>
+</<script type="module">
+import './src/news-app.js';
+import './src/news-footer.js';
+import '../../share-menu/share-menu.js';
+
+(adsbygoogle = window.adsbygoogle || []).push({
+
+     google_ad_client: "ca-pub-8720447500483449",
+
+     enable_page_level_ads: true
+
+});
+</script><script src="../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>

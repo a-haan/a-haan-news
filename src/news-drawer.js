@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,16 +6,16 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+*/
+import '../../../@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+import '../../../@polymer/app-layout/app-drawer/app-drawer.js';
+import '../../../@polymer/iron-selector/iron-selector.js';
+import { Polymer } from '../../../@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '../../../@polymer/polymer/lib/utils/html-tag.js';
 
-<dom-module id="news-drawer">
-
-  <template>
-
+Polymer({
+  _template: html`
     <style>
 
       app-drawer {
@@ -51,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
 
-    <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
+    <app-drawer opened="{{drawerOpened}}" swipe-open="" tabindex="0">
       <paper-icon-button icon="close" on-click="_closeDrawer"></paper-icon-button>
       <iron-selector role="navigation" class="drawer-list" selected="[[category.name]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[categories]]" as="category" initial-count="9">
@@ -59,34 +59,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </template>
       </iron-selector>
     </app-drawer>
+`,
 
-  </template>
+  is: 'news-drawer',
 
-  <script>
+  properties: {
 
-    Polymer({
+    categories: Array,
 
-      is: 'news-drawer',
+    category: Object,
 
-      properties: {
+    drawerOpened: {
+      type: Boolean,
+      notify: true
+    }
 
-        categories: Array,
+  },
 
-        category: Object,
-
-        drawerOpened: {
-          type: Boolean,
-          notify: true
-        }
-
-      },
-
-      _closeDrawer: function() {
-        this.drawerOpened = false;
-      }
-
-    });
-
-  </script>
-
-</dom-module>
+  _closeDrawer: function() {
+    this.drawerOpened = false;
+  }
+});

@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,14 +6,14 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+*/
+import '../../../@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
-
-<dom-module id="news-side-list">
-
-  <template>
-
+import { html } from '../../../@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
+class NewsSideList extends PolymerElement {
+  static get template() {
+    return html`
     <style>
 
       :host {
@@ -74,23 +74,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </h3>
   <dom-repeat items="[[items]]">
     <template>
-      <a href$="[[item.href]]">
+      <a href\$="[[item.href]]">
         <div class="category">[[item.category]]</div>
         <span class="headline">[[item.headline]]</span>
         <span class="time-ago">[[item.timeAgo]]</span>
       </a>
     </template>
   </dom-repeat>
-</template>
-
-<script>
-  class NewsSideList extends Polymer.Element {
-    static get is() { return 'news-side-list'; }
-    static get properties() { return {
-      items: Array
-    }}
+`;
   }
-  customElements.define(NewsSideList.is, NewsSideList);
-</script>
 
-</dom-module>
+  static get is() { return 'news-side-list'; }
+  static get properties() { return {
+    items: Array
+  }}
+}
+customElements.define(NewsSideList.is, NewsSideList);

@@ -8,7 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<script type="module" src="../../../@polymer/polymer/polymer-legacy.js"></script>
 
 <dom-module id="news-iframe">
 
@@ -47,54 +47,64 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         src: String,
 
-        _iframeCreated: Boolean
+<script type="module">
+import '../../../@polymer/polymer/polymer-legacy.js';
+import { Polymer } from '../../../@polymer/polymer/lib/legacy/polymer-fn.js';
+import { dom } from '../../../@polymer/polymer/lib/legacy/polymer.dom.js';
 
-      },
+Polymer({
 
-      observers: [
-        '_srcChanged(src, _iframeCreated)'
-      ],
+  is: 'news-iframe',
 
-      attached: function() {
-        if ('IntersectionObserver' in window) {
-          this._io = new IntersectionObserver(this._createIframe.bind(this));
-          this._io.observe(this);
-        } else {
-          // Intersection Observer is not available, so just create the iframe
-          // after a bit of a delay.
-          window.setTimeout(this._createIframe.bind(this), 100);
-        }
-      },
+  properties: {
 
-      detached: function() {
-        this._removeIntersectionObserver();
-      },
+    src: String,
 
-      _removeIntersectionObserver: function() {
-        if (this._io) {
-          this._io.disconnect();
-          this._io = null;
-        }
-      },
+    _iframeCreated: Boolean
 
-      _createIframe: function() {
-        this._removeIntersectionObserver();
-        if (this._iframe) {
-          return;
-        }
-        this._iframe = document.createElement('iframe');
-        Polymer.dom(this.root).appendChild(this._iframe);
-        this._iframeCreated = true;
-      },
+  },
 
-      _srcChanged: function(src) {
-        if (this._iframe) {
-          this._iframe.src = src;
-        }
-      }
+  observers: [
+    '_srcChanged(src, _iframeCreated)'
+  ],
 
-    });
+  attached: function() {
+    if ('IntersectionObserver' in window) {
+      this._io = new IntersectionObserver(this._createIframe.bind(this));
+      this._io.observe(this);
+    } else {
+      // Intersection Observer is not available, so just create the iframe
+      // after a bit of a delay.
+      window.setTimeout(this._createIframe.bind(this), 100);
+    }
+  },
 
-  </script>
+  detached: function() {
+    this._removeIntersectionObserver();
+  },
 
-</dom-module>
+  _removeIntersectionObserver: function() {
+    if (this._io) {
+      this._io.disconnect();
+      this._io = null;
+    }
+  },
+
+  _createIframe: function() {
+    this._removeIntersectionObserver();
+    if (this._iframe) {
+      return;
+    }
+    this._iframe = document.createElement('iframe');
+    dom(this.root).appendChild(this._iframe);
+    this._iframeCreated = true;
+  },
+
+  _srcChanged: function(src) {
+    if (this._iframe) {
+      this._iframe.src = src;
+    }
+  }
+
+});
+</script>

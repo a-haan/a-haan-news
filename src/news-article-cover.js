@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,18 +6,17 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+*/
+import '../../../@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-
-<link rel="import" href="news-gpt-ad5.html">
-<link rel="import" href="news-img.html">
-
-<dom-module id="news-article-cover">
-
-  <template>
-
+import '../../../@polymer/iron-icon/iron-icon.js';
+import './news-gpt-ad5.js';
+import './news-img.js';
+import { html } from '../../../@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '../../../@polymer/polymer/polymer-element.js';
+class NewsArticleCover extends PolymerElement {
+  static get template() {
+    return html`
     <style>
       :host {
         display: block;
@@ -157,9 +156,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <div class="ad-container">
-    <center><news-gpt-ad id="adslot5"
-        ad-unit-path="/21615022194/smart1"
-        ad-width="970" ad-height="250"></news-gpt-ad></center>
+    <center><news-gpt-ad id="adslot5" ad-unit-path="/21615022194/smart1" ad-width="970" ad-height="250"></news-gpt-ad></center>
     </div>
 <br>
     <div class="cover-text">
@@ -176,20 +173,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
 
     <div class="cover-img-container">
-      <news-img src="[[article.imageUrl]]" hidden$="[[!article.imageUrl]]"></news-img>
+      <news-img src="[[article.imageUrl]]" hidden\$="[[!article.imageUrl]]"></news-img>
       <div class="scrim"></div>
     </div>
+`;
+  }
 
-  </template>
-
-  <script>
-    class NewsArticleCover extends Polymer.Element {
-      static get is() { return 'news-article-cover'; }
-      static get properties() { return {
-        article: Object
-      }}
-    }
-    customElements.define(NewsArticleCover.is, NewsArticleCover);
-  </script>
-
-</dom-module>
+  static get is() { return 'news-article-cover'; }
+  static get properties() { return {
+    article: Object
+  }}
+}
+customElements.define(NewsArticleCover.is, NewsArticleCover);
